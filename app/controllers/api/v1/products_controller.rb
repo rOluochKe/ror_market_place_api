@@ -18,8 +18,7 @@ class Api::V1::ProductsController < ApplicationController
     if product.save
       render json: ProductSerializer.new(product).serializable_hash, status: :created
     else
-      render json: { errors: product.errors }, status:
-    :unprocessable_entity
+      render json: { errors: product.errors }, status: :unprocessable_entity
     end
   end
 
@@ -27,8 +26,7 @@ class Api::V1::ProductsController < ApplicationController
     if @product.update(product_params)
       render json: ProductSerializer.new(@product).serializable_hash
     else
-      render json: @product.errors, status:
-    :unprocessable_entity
+      render json: @product.errors, status: :unprocessable_entity
     end
   end
 
@@ -39,12 +37,12 @@ class Api::V1::ProductsController < ApplicationController
 
   private
 
-  def product_params
-    params.require(:product).permit(:title, :price, :published)
-  end
-
   def check_owner
     head :forbidden unless @product.user_id == current_user&.id
+  end
+
+  def product_params
+    params.require(:product).permit(:title, :price, :published)
   end
 
   def set_product
