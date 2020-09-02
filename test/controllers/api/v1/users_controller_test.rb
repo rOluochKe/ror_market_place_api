@@ -8,9 +8,11 @@ class Api::V1::UsersControllerTest < ActionDispatch::IntegrationTest
   test 'should show user' do
     get api_v1_user_url(@user), as: :json
     assert_response :success
-    # Test to ensure response contains the correct email
-    json_response = JSON.parse(response.body)
-    assert_equal @user.email, json_response['email']
+
+    json_response = JSON.parse(response.body, symbolize_names: true)
+    assert_equal @user.email, json_response.dig(:data, :attributes, :email)
+    assert_equal @user.products.first.id.to_s, json_response.dig(:data, :relationships, :products, :data, 0, :id)
+    assert_equal @user.products.first.title, json_response.dig(:included, 0, :attributes, :title)
   end
 
   test 'should create user' do
@@ -30,8 +32,7 @@ class Api::V1::UsersControllerTest < ActionDispatch::IntegrationTest
   test 'should update user' do
     patch api_v1_user_url(@user),
           params: { user: { email: @user.email } },
-          headers: { Authorization: JsonWebToken.encode(user_id:
-        @user.id) },
+          headers: { Authorization: JsonWebToken.encode(user_id: @user.id) },
           as: :json
     assert_response :success
   end
