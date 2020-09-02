@@ -20,9 +20,7 @@ class Api::V1::OrdersControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'should show orders' do
-    get api_v1_orders_url,
-        headers: { Authorization: JsonWebToken.encode(user_id: @order.user_id) },
-        as: :json
+    get api_v1_orders_url, headers: { Authorization: JsonWebToken.encode(user_id: @order.user_id) }, as: :json
     assert_response :success
 
     json_response = JSON.parse(response.body)
@@ -45,16 +43,6 @@ class Api::V1::OrdersControllerTest < ActionDispatch::IntegrationTest
       post api_v1_orders_url, params: @order_params, as: :json
     end
     assert_response :forbidden
-  end
-
-  test 'should create order with two products' do
-    assert_difference('Order.count', 1) do
-      post api_v1_orders_url,
-           params: @order_params,
-           headers: { Authorization: JsonWebToken.encode(user_id: @order.user_id) },
-           as: :json
-    end
-    assert_response :created
   end
 
   test 'should create order with two products and placements' do
