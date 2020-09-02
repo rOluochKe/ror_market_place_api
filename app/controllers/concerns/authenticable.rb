@@ -11,5 +11,5 @@ module Authenticable
                     rescue StandardError
                       ActiveRecord::RecordNotFound
                     end
-    end
+  end
 end
