@@ -8,7 +8,7 @@ class PlacementTest < ActiveSupport::TestCase
   test 'decreases the product quantity by the placement quantity' do
     product = @placement.product
 
-    assert_difference('product.quantity', -@placement.quantity) do
+    assert_difference('product.quantity', -product.quantity) do
       @placement.decrement_product_quantity!
     end
   end

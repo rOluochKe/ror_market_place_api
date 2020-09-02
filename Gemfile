@@ -18,6 +18,8 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'faker', '~> 1.6', '>= 1.6.6'
 gem 'fast_jsonapi', '~> 1.1', '>= 1.1.1'
 gem 'jwt', '~> 2.2', '>= 2.2.2'
+gem 'kaminari', '~> 0.16.3'
+gem 'rack-cors', '~> 0.4.0'
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
@@ -36,6 +38,7 @@ end
 group :development do
   gem 'listen', '~> 3.2'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
+  gem 'bullet', '~> 5.7', '>= 5.7.5'
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
 end
