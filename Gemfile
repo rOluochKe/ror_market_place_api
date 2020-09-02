@@ -19,6 +19,7 @@ gem 'faker', '~> 1.6', '>= 1.6.6'
 gem 'fast_jsonapi', '~> 1.1', '>= 1.1.1'
 gem 'jwt', '~> 2.2', '>= 2.2.2'
 gem 'kaminari', '~> 0.16.3'
+gem 'rack-cors', '~> 0.4.0'
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
